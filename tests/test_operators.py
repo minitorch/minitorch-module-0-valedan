@@ -15,6 +15,7 @@ from minitorch.operators import (
     log,
     log_back,
     lt,
+    map,
     max,
     mul,
     neg,
@@ -181,6 +182,19 @@ def test_zip_with(a: float, b: float, c: float, d: float) -> None:
 
 
 @pytest.mark.task0_3
+@given(small_floats, small_floats, small_floats)
+def test_map(a: float, b: float, c: float) -> None:
+    X = [a, b, c]
+    Y = map(
+        lambda x: x * 2,
+    )(X)
+    a1, b1, c1 = Y
+    assert_close(a * 2, a1)
+    assert_close(b * 2, b1)
+    assert_close(c * 2, c1)
+
+
+@pytest.mark.task0_3
 @given(
     lists(small_floats, min_size=5, max_size=5),
     lists(small_floats, min_size=5, max_size=5),
@@ -190,8 +204,7 @@ def test_sum_distribute(ls1: List[float], ls2: List[float]) -> None:
     Write a test that ensures that the sum of `ls1` plus the sum of `ls2`
     is the same as the sum of each element of `ls1` plus each element of `ls2`.
     """
-    # TODO: Implement for Task 0.3.
-    raise NotImplementedError("Need to implement for Task 0.3")
+    assert_close(add(sum(ls1), sum(ls2)), sum(addLists(ls1, ls2)))
 
 
 @pytest.mark.task0_3
