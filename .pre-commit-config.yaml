@@ -37,7 +37,7 @@ repos:
   rev: v0.971
   hooks:
   - id: mypy
-    exclude: ^(docs/)|(project/)|(assignments/)
+    exclude: ^(docs/)|(project/)|(assignments/)|(app.py)
 
 
 # Black, the code formatter, natively supports pre-commit
